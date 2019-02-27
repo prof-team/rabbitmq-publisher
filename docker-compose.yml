@@ -8,6 +8,7 @@ services:
       RABBITMQ_URL: ${RABBITMQ_URL}
       NODE_ENV: 'development'
       APP_PORT: 3001
+      LOGGER_URL: ${LOGGER_URL}
     volumes:
       - .:/usr/src/app
     working_dir: /usr/src/app

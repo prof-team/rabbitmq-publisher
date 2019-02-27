@@ -28,7 +28,7 @@ const startConnect =  function() {
 
         conn.on("close", function() {
             isConnected = false;
-            logger.error("[AMQP] start reconnecting.");
+            logger.error("[AMQP] connection was closed! start reconnecting...");
             return setTimeout(startConnect, RECONNECT_TIMEOUT);
         });
 

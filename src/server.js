@@ -5,6 +5,12 @@ const bodyParser = require('body-parser');
 const amqp = require('./components/amqp');
 const { check, validationResult } = require('express-validator/check');
 
+process.on('uncaughtException', function (error) {
+    logger.error(error);
+
+    process.exit();
+});
+
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

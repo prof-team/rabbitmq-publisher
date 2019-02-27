@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --ignore 'var/*' src/forever.js",
-    "prod": "node src/forever.js"
+    "dev": "nodemon --ignore 'var/*' src/server.js"
   },
   "dependencies": {
     "express": "^4.16.2",
@@ -16,6 +15,6 @@
     "lowdb": "~1.0.0",
     "shortid": "~2.2.14",
     "express-validator": "^5.3.1",
-    "forever-monitor": "^1.7.1"
+    "request": "^2.88.0"
   }
 }

@@ -14,4 +14,4 @@ RUN rm -f /app/README.md
 
 RUN yarn install
 
-CMD ["node", "/app/src/forever.js"]
+CMD ["node", "/app/src/server.js"]
