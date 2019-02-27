@@ -1,0 +1,20 @@
+{
+  "name": "online-checker",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --ignore 'var/*' src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "fs": "0.0.2",
+    "path": "^0.12.7",
+    "winston": "~2.4.3",
+    "winston-daily-rotate-file": "~3.2.3",
+    "amqplib": "^0.5.2",
+    "lowdb": "~1.0.0",
+    "shortid": "~2.2.14",
+    "express-validator": "^5.3.1",
+    "forever-monitor": "^1.7.1"
+  }
+}

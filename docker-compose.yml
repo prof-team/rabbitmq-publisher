@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  app:
+    image: grischuksasha/node
+    container_name: rabbitmq-balancer
+    environment:
+      RABBITMQ_URL: ${RABBITMQ_URL}
+      NODE_ENV: 'development'
+      APP_PORT: 3001
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: /bin/bash -c "yarn install; npm start"
+    restart: "always"
+    ports:
+      - "${LOCAL_APP_PORT}:3001"
+    networks:
+      - devnetwork
+networks:
+  devnetwork:
+    external: true
