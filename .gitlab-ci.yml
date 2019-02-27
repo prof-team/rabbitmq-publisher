@@ -1,0 +1,12 @@
+image: docker:stable
+
+stages:
+  - build
+
+build:
+  stage: build
+  before_script:
+    - docker login -u $DOCKER_LOGIN -p$DOCKER_PASS
+  script:
+    - docker build -t essay14/rabbitmq-publisher .
+    - docker push essay14/rabbitmq-publisher

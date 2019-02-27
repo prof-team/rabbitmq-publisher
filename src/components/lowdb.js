@@ -5,9 +5,9 @@ const amqp = require('./amqp');
 const path = require('path');
 const logger = require('./logger');
 
-const REPUBLISH_TIMEOUT = 5000; // miliseconds
+const REPUBLISH_TIMEOUT = 60000; // 60 seconds
 
-const adapter = new FileSync(path.join(__dirname, '../var/lowdb/messages.json'));
+const adapter = new FileSync(path.join(__dirname, '../../var/lowdb/messages.json'));
 const db = low(adapter);
 
 db.defaults({ messages: [] })

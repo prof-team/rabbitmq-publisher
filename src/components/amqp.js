@@ -32,8 +32,10 @@ const startConnect =  function() {
             return setTimeout(startConnect, RECONNECT_TIMEOUT);
         });
 
-        console.log("[AMQP] connected to "+process.env.RABBITMQ_URL);
-        logger.info("[AMQP] connected to "+process.env.RABBITMQ_URL);
+        let msg = "[AMQP] connected to "+process.env.RABBITMQ_URL;
+
+        console.log(msg);
+        logger.info(msg);
 
         amqpConn = conn;
 

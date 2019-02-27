@@ -1,9 +1,10 @@
 {
-  "name": "online-checker",
+  "name": "rabbitmq-publisher",
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --ignore 'var/*' src/server.js"
+    "dev": "nodemon --ignore 'var/*' src/forever.js",
+    "prod": "node src/forever.js"
   },
   "dependencies": {
     "express": "^4.16.2",

@@ -5,18 +5,16 @@ const bodyParser = require('body-parser');
 const amqp = require('./components/amqp');
 const { check, validationResult } = require('express-validator/check');
 
-process.on('uncaughtException', function (error) {
-    logger.error(error);
-});
-
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const server = http.createServer(app);
 server.listen(process.env.APP_PORT, function () {
-    console.log("start server");
-    logger.info("start server");
+    let msg = "[HTTP] server is listening on port " + process.env.APP_PORT;
+
+    console.log(msg);
+    logger.info(msg);
 });
 
 app.post('/publish', [

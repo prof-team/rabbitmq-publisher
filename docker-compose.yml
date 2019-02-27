@@ -2,8 +2,8 @@ version: '3'
 
 services:
   app:
-    image: grischuksasha/node
-    container_name: rabbitmq-balancer
+    image: profteam/node
+    container_name: rabbitmq-publisher
     environment:
       RABBITMQ_URL: ${RABBITMQ_URL}
       NODE_ENV: 'development'
@@ -11,7 +11,7 @@ services:
     volumes:
       - .:/usr/src/app
     working_dir: /usr/src/app
-    command: /bin/bash -c "yarn install; npm start"
+    command: /bin/bash -c "yarn install; npm run dev"
     restart: "always"
     ports:
       - "${LOCAL_APP_PORT}:3001"
