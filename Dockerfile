@@ -1,4 +1,4 @@
-FROM node:carbon
+FROM node:carbon-alpine
 
 # Create app directory
 RUN mkdir /app
