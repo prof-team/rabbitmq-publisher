@@ -5,7 +5,7 @@ const amqp = require('./amqp');
 const path = require('path');
 const logger = require('./logger');
 
-const REPUBLISH_TIMEOUT = 60000; // 60 seconds
+const REPUBLISH_TIMEOUT = 30000; // 30 seconds
 
 const adapter = new FileSync(path.join(__dirname, '../../var/lowdb/messages.json'));
 const db = low(adapter);
@@ -17,7 +17,6 @@ module.exports.localSave = function (exchange, routingKey, message) {
     db.get('messages')
         .push({
             id: shortid.generate(),
-            status: false,
             exchange: exchange,
             routingKey: routingKey,
             message: message,
@@ -28,7 +27,7 @@ module.exports.localSave = function (exchange, routingKey, message) {
 
 const rePublish = () => {
     if (amqp.isConnected()) {
-        let messages = db.get('messages').filter({ status: false }).take(50).value();
+        let messages = db.get('messages').take(50).value();
 
         for (let message of messages) {
             logger.info("[LOWDB] Republish message", message.exchange, message.routingKey, message.message);
