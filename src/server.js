@@ -39,5 +39,7 @@ app.post('/publish', [
 });
 
 app.all('/*', function(req, res, next) {
+    logger.warn(`Someone ${req.connection.remoteAddress} sent request ${req.method} ${req.url} `);
+
     return res.status(404).json({"error": "Not found"});
 });
