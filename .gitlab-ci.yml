@@ -2,6 +2,7 @@ image: docker:stable
 
 stages:
   - build
+  - deploy
 
 build:
   stage: build
@@ -10,3 +11,18 @@ build:
   script:
     - docker build -t essay14/rabbitmq-publisher .
     - docker push essay14/rabbitmq-publisher
+
+deploy_test:
+  before_script:
+    - 'which ssh-agent || (apk update && apk add openssh-client -y)'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $FISP3_SERVER_URL >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - ssh -t root@$FISP3_SERVER_URL "cd /var/docker/tools/fisp3/rabbitmq-publisher/hotfix; docker-compose pull && docker-compose down && docker-compose up -d && docker system prune --force"

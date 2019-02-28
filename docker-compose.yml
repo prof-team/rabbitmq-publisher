@@ -9,6 +9,7 @@ services:
       NODE_ENV: 'development'
       APP_PORT: 3001
       LOGGER_URL: ${LOGGER_URL}
+      LOGGER_SERVICE: ${LOGGER_SERVICE}
     volumes:
       - .:/usr/src/app
     working_dir: /usr/src/app

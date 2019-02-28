@@ -13,7 +13,7 @@ class ApiTransport extends Transport {
             request
                 .post(process.env.LOGGER_URL, {timeout: 1500})
                 .form({
-                    service: 'RabbitmqBalancer',
+                    service: process.env.LOGGER_SERVICE,
                     category: 'application',
                     level: level,
                     prefix: '[-]',
