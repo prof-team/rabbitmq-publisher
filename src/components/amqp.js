@@ -1,5 +1,6 @@
 const logger = require('./logger');
 const lowdb = require('./lowdb');
+const helper = require('./helper');
 const amqp = require('amqplib/callback_api');
 
 const RECONNECT_TIMEOUT = 5000; // miliseconds
@@ -18,7 +19,10 @@ const startConnect =  function() {
 
         if (err) {
             isConnected = false;
-            logger.error("[AMQP]", err.message);
+            let msg = "[AMQP]" + err.message;
+
+            console.log(helper.buildLogMessage(msg));
+            logger.error(msg);
             return setTimeout(startConnect, RECONNECT_TIMEOUT);
         }
 
@@ -28,13 +32,16 @@ const startConnect =  function() {
 
         conn.on("close", function() {
             isConnected = false;
-            logger.error("[AMQP] connection was closed! start reconnecting...");
+            let msg = "[AMQP] connection was closed! start reconnecting...";
+
+            console.log(helper.buildLogMessage(msg));
+            logger.error(msg);
             return setTimeout(startConnect, RECONNECT_TIMEOUT);
         });
 
         let msg = "[AMQP] connected to "+process.env.RABBITMQ_URL;
 
-        console.log(msg);
+        console.log(helper.buildLogMessage(msg));
         logger.info(msg);
 
         amqpConn = conn;

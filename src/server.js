@@ -3,6 +3,7 @@ const express = require('express');
 const logger = require('./components/logger');
 const bodyParser = require('body-parser');
 const amqp = require('./components/amqp');
+const helper = require('./components/helper');
 const { check, validationResult } = require('express-validator/check');
 
 process.on('uncaughtException', function (error) {
@@ -19,7 +20,7 @@ const server = http.createServer(app);
 server.listen(process.env.APP_PORT, function () {
     let msg = "[HTTP] server is listening on port " + process.env.APP_PORT;
 
-    console.log(msg);
+    console.log(helper.buildLogMessage(msg));
     logger.info(msg);
 });
 
@@ -30,7 +31,11 @@ app.post('/publish', [
 ], function (req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        logger.error('Validation errors', errors.array());
+        let msg = 'Validation errors ' + errors.array().toString();
+
+        logger.error(msg);
+        console.log(helper.buildLogMessage(msg));
+
         return res.status(422).json({"error": "Invalid params"});
     }
     amqp.publish(req.body.exchange, req.body.routingKey, req.body.message);
