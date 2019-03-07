@@ -19,7 +19,7 @@ const startConnect =  function() {
 
         if (err) {
             isConnected = false;
-            let msg = "[AMQP]" + err.message;
+            let msg = "[AMQP] " + err.message;
 
             console.log(helper.buildLogMessage(msg));
             logger.error(msg);
