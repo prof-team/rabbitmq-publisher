@@ -5,7 +5,6 @@ RUN mkdir /app
 ADD . /app
 WORKDIR /app
 
-RUN ls -la /app/
 RUN rm /app/.gitignore
 RUN rm /app/.env.example
 RUN rm /app/docker-compose.yml
