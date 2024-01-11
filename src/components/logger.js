@@ -6,8 +6,9 @@ const request = require('request');
 
 class ApiTransport extends Transport {
     log(level, message) {
-        if (level === 'warn')
+        if (level === 'warn') {
             level = 'warning';
+        }
 
         if (level === 'warning' || level === 'error') {
             request

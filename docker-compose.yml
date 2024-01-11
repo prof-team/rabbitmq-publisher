@@ -17,8 +17,3 @@ services:
     restart: "always"
     ports:
       - "${LOCAL_APP_PORT}:3001"
-    networks:
-      - devnetwork
-networks:
-  devnetwork:
-    external: true
